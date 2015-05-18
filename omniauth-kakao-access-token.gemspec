@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["heoseok87@leevi.co.kr"]
   gem.description   = %q{A kakao strategy using token for OmniAuth. Can be used for client side kakao login. }
   gem.summary       = %q{A kakao strategy using token for OmniAuth.}
-  
+  gem.homepage      = "https://github.com/LEEVI-dev/omniauth_kakao_access_token"
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
   gem.name          = "omniauth-kakao-access-token"

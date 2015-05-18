@@ -6,16 +6,6 @@ Supports client-side flow only.
 
 Mostly shamelessly copied from [omniauth-facebook-access-token](https://github.com/SoapSeller/omniauth-facebook-access-token)
 
-## Installing
-
-Add to your `Gemfile`:
-
-```ruby
-gem 'omniauth-kakao-access-token'
-```
-
-Then `bundle install`.
-
 ## Usage
 
 ### Server-Side
