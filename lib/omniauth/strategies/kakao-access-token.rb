@@ -2,8 +2,7 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class KakaoAccessToken
-      include OmniAuth::Strategies::OAuth2
+    class KakaoAccessToken < OmniAuth::Strategies::OAuth2
       option :name, 'kakao_access_token'
 
       option :client_options, {
@@ -40,9 +39,16 @@ module OmniAuth
       def raw_properties
         @raw_properties ||= raw_info['properties']
       end
+      
+      def request_phase
+        form = OmniAuth::Form.new(:title => "User Token", :url => callback_path)
+        form.text_field "Access Token", "access_token"
+        form.button "Sign In"
+        form.to_response
+      end
 
       def callback_phase
-        if !request.params['token'] || request.params['token'].to_s.empty?
+        if !request.params['access_token'] || request.params['access_token'].to_s.empty?
           raise ArgumentError.new("No access token provided.")
         end
 
@@ -67,8 +73,7 @@ module OmniAuth
       protected
 
       def build_access_token
-        hash = request.params.slice("token", "expires_at", "expires", "refresh_token")
-        hash.update(options.access_token_options)
+        hash = request.params.slice("access_token", "expires_at", "expires", "refresh_token")
         ::OAuth2::AccessToken.from_hash(
           client,
           hash
